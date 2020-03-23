@@ -26,7 +26,7 @@ $(function() {
   var socket = io();
 
   const addParticipantsMessage = (data) => {
-    var message = '';
+    var message = 'Leave your message here for online participants';
     if (data.numUsers === 1) {
       message += "there's 1 participant";
     } else {
@@ -35,9 +35,19 @@ $(function() {
     log(message);
   }
 
+  const makeid = (length) => {
+   var result           = '';
+   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+   var charactersLength = characters.length;
+   for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   }
+   return result;
+}
+
   // Sets the client's username
   const setUsername = () => {
-    username = cleanInput($usernameInput.val().trim());
+    username = makeid(5);
 
     // If the username is valid
     if (username) {
